@@ -15,6 +15,9 @@ class App
 	 */
 	private $_loadedControllers = [];
 
+	/**
+	 * @var BaseControlller
+	 */
 	private $_baseController;
 
 	/**
@@ -26,13 +29,32 @@ class App
 	}
 
 	/**
+	 * @param string      $className
+	 * @param string $route
+	 * @return mixed
+	 */
+	public function classLoader($className, $route = '')
+	{
+		$fileName = $route .DS . $className.".php";
+
+		if (!file_exists($fileName)) {
+			echo "Class $fileName does not exist";
+		}
+
+		require_once $fileName;
+
+		return new $className($this);
+	}
+
+	/**
 	 * @return BaseController
 	 */
 	public function getBaseController()
 	{
 		if (!$this->_baseController) {
-			require_once('BaseController.php');
-			$this->_baseController = new BaseController($this);
+
+			$this->_baseController = $this->classLoader('BaseController', dirname(__FILE__));
+		
 		}
 
 		return $this->_baseController;
@@ -42,22 +64,24 @@ class App
 	 * @param string $controllerName
 	 * @return mixed
 	 */
-	public function loadController(string $controllerName)
+	public function loadController(string $controllerName = 'main')
 	{
 		if (isset($this->_loadedControllers[$controllerName])) {
 			return $this->_loadedControllers[$controllerName];
 		}
-		
+
 		$controller = $this->getBaseController();
+		$controllerName = ucfirst($controllerName)."Controller";
 		
-		return $controller->loadController();
+		return $controller->loadController($controllerName);
 	}
 
-
-
+	/**
+	 *
+	 */
 	public function run()
 	{
-		echo $this->loadMainView();
+		echo $this->loadController()->loadMainView();
 	}
 
 }
