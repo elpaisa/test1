@@ -1,0 +1,38 @@
+{
+  "id": 112568,
+  "contact": {
+  "location": {
+  "address1": "adddt",
+  "address2": "",
+  "city": "Kutjevo",
+  "country": "US",
+  "state": "AB"
+    },
+"mobilePhone": "+13102913265",
+"alternatePhone": ""
+  },
+
+"boarding": {
+"rate": 35,
+"offered": true,
+"attributes": {
+"unsupervisedPetArea": null,
+"maxDogsAllowed": "2",
+"petNightSleepArea": null,
+"maxWalksPerDay": null,
+"supervisionLevel": null,
+"maxPottyBreaksPerDay": null
+    }
+  },
+    "daycare": {
+    "rate": 0,
+    "offered": false,
+    "attributes": {
+    "maxDogsAllowed": "3"
+    }
+  },
+"goals": [
+    "1",
+    "4"
+  ]
+}
