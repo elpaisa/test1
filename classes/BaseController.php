@@ -37,8 +37,8 @@ class BaseController
         $this->app           = $app;
         $parentDir           = dirname(__FILE__, 1) . DS;
         $this->controllerDir = $parentDir . "controllers";
-        $this->baseModel     = $this->app->classLoader('BaseModel', $parentDir);
-        $this->baseView      = $this->app->classLoader('BaseView', $parentDir);
+        $this->baseModel     = new BaseModel($this->app);
+        $this->baseView      = new BaseView($this->app);
     }
 
     /**

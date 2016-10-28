@@ -2,7 +2,7 @@
 /**
  * Main entry point of the application.
  */
-require_once 'classes/App.php';
+require_once 'autoload.php';
 
 $app = new App();
 $app->run();

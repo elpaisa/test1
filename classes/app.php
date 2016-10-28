@@ -1,8 +1,6 @@
 <?php
 
 define('DS', DIRECTORY_SEPARATOR);
-require_once 'ControllerInterface.php';
-require_once 'ModelInterface.php';
 
 /**
  * Class App
@@ -68,7 +66,7 @@ class App
     public function getBaseController()
     {
         if (!$this->_baseController) {
-            $this->_baseController = $this->classLoader('BaseController', dirname(__FILE__));
+            $this->_baseController = new BaseController($this);
         }
 
         return $this->_baseController;
