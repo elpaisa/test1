@@ -21,11 +21,16 @@ class App
 	private $_baseController;
 
 	/**
+	 * @var string
+	 */
+	public $baseDir;
+
+	/**
 	 * App constructor.
 	 */
 	public function __construct()
 	{
-
+		$this->baseDir = dirname(__FILE__, 1);
 	}
 
 	/**
@@ -33,7 +38,7 @@ class App
 	 * @param string $route
 	 * @return mixed
 	 */
-	public function classLoader($className, $route = '')
+	public function classLoader($className, $route = '', $attributes = [])
 	{
 		$fileName = $route .DS . $className.".php";
 
@@ -43,7 +48,7 @@ class App
 
 		require_once $fileName;
 
-		return new $className($this);
+		return new $className($this, $attributes);
 	}
 
 	/**
