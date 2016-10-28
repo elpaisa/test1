@@ -1,7 +1,10 @@
-PHP7 Mini MVC Framework
+#PHP7 Mini MVC Framework
 
 
-Execute project:
+*Execute project:*
+
+```
 php -S 0:8001 -t project/
+```
 
-Enjoy!!
+_.Enjoy!!._
