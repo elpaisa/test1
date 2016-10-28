@@ -9,12 +9,19 @@ class BaseView extends BaseController
     public $app;
 
     /**
+     * @var string
+     */
+    public $viewDir;
+
+    /**
      * BaseModel constructor.
      * @param App $app
      */
     public function __construct(App $app)
     {
-        $this->app = $app;
+        $this->app     = $app;
+        $parentDir     = dirname(__FILE__, 1) . DS;
+        $this->viewDir = $parentDir . "views";
     }
 
     /**
@@ -24,7 +31,7 @@ class BaseView extends BaseController
     public function loadView($view)
     {
 
-        $fileName = $this->app->baseDir . DS . "views/$view.html";
+        $fileName = $this->viewDir . DS . "$view.html";
 
         if (!file_exists($fileName)) {
             echo "View $fileName does not exist";
@@ -38,16 +45,33 @@ class BaseView extends BaseController
     /**
      * @param $view
      * @param $model
+     * @return string
      */
     public function parseView($view, $model)
     {
-        echo $view;
 
-        var_dump($model);
+        foreach ($model as $key => $attr) {
+            if (is_object($attr) || is_array($attr)) {
+                $attributes = $attr;
+                $view       = $this->parseView($view, $attributes);
+            } else {
+                if (is_int($key)) {
+                    $attributeName = "$key";
+                } else {
+                    preg_match_all('/((?:^|[A-Z])[a-z]+)/', $key, $matches);
+                    $attributeName = ucwords(implode($matches[0], " "));
+                }
+
+                $view  = str_replace("{{" . $key . "}}", "<strong>$attributeName:</strong> <span>$attr</span>", $view);
+            }
+        }
+
+        return $view;
     }
 
     /**
      * @param $model
+     * @return string
      */
     public function loadMainView($model)
     {

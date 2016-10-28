@@ -24,7 +24,7 @@ class BaseController
     public $baseView;
 
     /**
-     * BaseControlller constructor.
+     * BaseController constructor.
      * @param App $app
      */
     public function __construct(App $app)
@@ -32,7 +32,6 @@ class BaseController
         $this->app           = $app;
         $parentDir           = dirname(__FILE__, 1) . DS;
         $this->controllerDir = $parentDir . "controllers";
-        $this->viewDir       = $parentDir . "views";
         $this->baseModel     = $this->app->classLoader('BaseModel', $parentDir);
         $this->baseView      = $this->app->classLoader('BaseView', $parentDir);
     }

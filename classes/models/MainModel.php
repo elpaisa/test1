@@ -1,6 +1,6 @@
 <?php
 
-class MainModel extends BaseModel implements ModelInterface
+class MainModel implements ModelInterface
 {
 
     /**
@@ -13,6 +13,10 @@ class MainModel extends BaseModel implements ModelInterface
             foreach ($attributes as $key => $value) {
                 $this->$key = $value;
             }
+        }
+        
+        if (isset($this->app)) {
+            unset($this->app);
         }
 
         return $this;
