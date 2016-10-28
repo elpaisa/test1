@@ -25,12 +25,10 @@ class BaseModel
 
     public function loadModel($modelName, $attributes)
     {
-
         return $this->app->classLoader(
-            ucfirst($modelName),
-            $this->modelDir,
-            $attributes
-        );
+            ucfirst($modelName)."Model",
+            $this->modelDir
+        )->loadAttributes($attributes);
     }
-    
+
 }

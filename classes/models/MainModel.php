@@ -1,17 +1,20 @@
 <?php
 
-class MainModel extends BaseModel
+class MainModel extends BaseModel implements ModelInterface
 {
-    
+
     /**
-     * MainModel constructor.
-     * @param App   $app
-     * @param array $attributes
+     * @param $attributes
+     * @return $this
      */
-    public function __construct($app, $attributes = [])
+    public function loadAttributes($attributes)
     {
-        $this->loadAttributes($attributes);
+        if (is_array($attributes) || is_object($attributes)) {
+            foreach ($attributes as $key => $value) {
+                $this->$key = $value;
+            }
+        }
+
+        return $this;
     }
-    
-    
 }

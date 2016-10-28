@@ -1,21 +1,23 @@
 <?php 
 
-class MainController extends BaseController
+class MainController extends BaseController implements ControllerInterface
 {
     public $view = 'main';
-    
-    public $app;
-    
+
+    /**
+     * MainController constructor.
+     * @param $app
+     */
     public function __construct($app)
     {
         $this->app = $app;
     }
-    
-    public function main()
+
+
+    public function run()
     {
-        $getEndPoint = file_get_contents($this->app->baseDir('mock_api_endpoint.json'));
-        var_dump($getEndPoint);
-        exit;
-        $model = $this->baseModel->loadModel($this->view, 1);
+        $getEndPoint = json_decode(file_get_contents($this->app->baseDir.DS.'mock_api_endpoint.json'));
+        $model = $this->app->getBaseController()->baseModel->loadModel($this->view, $getEndPoint);
+        var_dump($model);
     }
 }

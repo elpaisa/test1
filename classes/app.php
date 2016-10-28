@@ -1,6 +1,8 @@
 <?php 
 
 define('DS', DIRECTORY_SEPARATOR);
+require_once 'ControllerInterface.php';
+require_once 'ModelInterface.php';
 
 class App 
 {
@@ -26,11 +28,17 @@ class App
 	public $baseDir;
 
 	/**
+	 * @var App
+	 */
+	public $app;
+
+	/**
 	 * App constructor.
 	 */
 	public function __construct()
 	{
-		$this->baseDir = dirname(__FILE__, 1);
+		$this->baseDir = dirname(__FILE__, 2);
+		$this->app = $this;
 	}
 
 	/**
@@ -48,7 +56,7 @@ class App
 
 		require_once $fileName;
 
-		return new $className($this, $attributes);
+		return new $className($this->app, $attributes);
 	}
 
 	/**
@@ -57,9 +65,7 @@ class App
 	public function getBaseController()
 	{
 		if (!$this->_baseController) {
-
 			$this->_baseController = $this->classLoader('BaseController', dirname(__FILE__));
-		
 		}
 
 		return $this->_baseController;
@@ -86,7 +92,7 @@ class App
 	 */
 	public function run()
 	{
-		echo $this->loadController()->loadMainView();
+		echo $this->loadController()->run();
 	}
 
 }

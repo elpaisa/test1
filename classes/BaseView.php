@@ -9,11 +9,6 @@ class BaseView extends BaseController
     public $app;
 
     /**
-     * @var string
-     */
-    public $modelDir;
-
-    /**
      * BaseModel constructor.
      * @param App $app
      */
@@ -21,7 +16,6 @@ class BaseView extends BaseController
     {
         $this->app           = $app;
     }
-
 
     /**
      * @param $view
@@ -39,5 +33,28 @@ class BaseView extends BaseController
 
         return file_get_contents($fileName);
 
+    }
+
+    /**
+     * @param $view
+     * @param $model
+     */
+    public function parseView($view, $model)
+    {
+        echo $view;
+
+        var_dump($model);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function loadMainView()
+    {
+        $view = $this->baseView->loadView('main');
+
+        return $this->parseView($view,
+            $this->app->getBaseController()->baseModel->getModel('main')
+        );
     }
 }
