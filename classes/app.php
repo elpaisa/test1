@@ -4,14 +4,13 @@ define('DS', DIRECTORY_SEPARATOR);
 require_once 'ControllerInterface.php';
 require_once 'ModelInterface.php';
 
+/**
+ * Class App
+ *
+ * @author John L. Diaz
+ */
 class App 
 {
-
-	/**
-	 * @var array
-	 */
-	private $_loadedViews = [];
-
 	/**
 	 * @var array
 	 */
@@ -42,8 +41,11 @@ class App
 	}
 
 	/**
+	 * Loads a class using the path, some autoloader can be implemented instead
+	 *
 	 * @param string      $className
 	 * @param string $route
+	 * @param array  $attributes
 	 * @return mixed
 	 */
 	public function classLoader($className, $route = '', $attributes = [])
@@ -88,7 +90,9 @@ class App
 	}
 
 	/**
+	 * Entry point of the application
 	 *
+	 * @return void
 	 */
 	public function run()
 	{

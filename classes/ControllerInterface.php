@@ -1,6 +1,14 @@
 <?php
 
+/**
+ * Interface ControllerInterface
+ *
+ * @author John L. Diaz
+ */
 interface ControllerInterface
 {
-    public function run();
+    /**
+     * @return mixed
+     */
+    public function run(): string;
 }

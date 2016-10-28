@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class BaseController
+ *
+ * @author John L. Diaz
+ */
 class BaseController
 {
 

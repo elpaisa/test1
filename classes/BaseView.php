@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Class BaseView
+ * 
+ * @author John L. Diaz
+ */
 class BaseView extends BaseController
 {
 
@@ -28,7 +32,7 @@ class BaseView extends BaseController
      * @param $view
      * @return mixed
      */
-    public function loadView($view)
+    public function loadView($view): string
     {
 
         $fileName = $this->viewDir . DS . "$view.html";
@@ -47,7 +51,7 @@ class BaseView extends BaseController
      * @param $model
      * @return string
      */
-    public function parseView($view, $model)
+    public function parseView($view, $model): string
     {
 
         foreach ($model as $key => $attr) {
@@ -62,7 +66,7 @@ class BaseView extends BaseController
                     $attributeName = ucwords(implode($matches[0], " "));
                 }
 
-                $view  = str_replace("{{" . $key . "}}", "<strong>$attributeName:</strong> <span>$attr</span>", $view);
+                $view = str_replace("{{" . $key . "}}", "<strong>$attributeName:</strong> <span>$attr</span>", $view);
             }
         }
 
@@ -70,10 +74,10 @@ class BaseView extends BaseController
     }
 
     /**
-     * @param $model
+     * @param Object $model
      * @return string
      */
-    public function loadMainView($model)
+    public function loadMainView($model): string
     {
         return $this->parseView($this->loadView('main'), $model);
     }
