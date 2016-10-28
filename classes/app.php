@@ -54,6 +54,7 @@ class App
 
         if (!file_exists($fileName)) {
             echo "Class $fileName does not exist";
+            exit(1);
         }
 
         require_once $fileName;
