@@ -19,7 +19,7 @@ class BaseController
     public $baseModel;
 
     /**
-     * @var mixed
+     * @var BaseView
      */
     public $baseView;
 

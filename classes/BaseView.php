@@ -14,7 +14,7 @@ class BaseView extends BaseController
      */
     public function __construct(App $app)
     {
-        $this->app           = $app;
+        $this->app = $app;
     }
 
     /**
@@ -24,7 +24,7 @@ class BaseView extends BaseController
     public function loadView($view)
     {
 
-        $fileName = $this->app->baseDir.DS."views/$view.html";
+        $fileName = $this->app->baseDir . DS . "views/$view.html";
 
         if (!file_exists($fileName)) {
             echo "View $fileName does not exist";
@@ -47,14 +47,10 @@ class BaseView extends BaseController
     }
 
     /**
-     * @return mixed
+     * @param $model
      */
-    public function loadMainView()
+    public function loadMainView($model)
     {
-        $view = $this->baseView->loadView('main');
-
-        return $this->parseView($view,
-            $this->app->getBaseController()->baseModel->getModel('main')
-        );
+        return $this->parseView($this->loadView('main'), $model);
     }
 }

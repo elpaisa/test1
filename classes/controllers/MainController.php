@@ -12,12 +12,14 @@ class MainController extends BaseController implements ControllerInterface
     {
         $this->app = $app;
     }
-
-
+    
     public function run()
     {
+        $baseController = $this->app->getBaseController();
         $getEndPoint = json_decode(file_get_contents($this->app->baseDir.DS.'mock_api_endpoint.json'));
-        $model = $this->app->getBaseController()->baseModel->loadModel($this->view, $getEndPoint);
-        var_dump($model);
+        $model = $baseController->baseModel->loadModel($this->view, $getEndPoint);
+
+        return $baseController->baseView->loadMainView($model);
+        
     }
 }
